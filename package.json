@@ -1,0 +1,14 @@
+{
+  "name": "gourav-maharshi-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gourav Maharshi — Senior Finance Trainer & Consultant. Website with blog powered by Eleventy + Decap CMS.",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "luxon": "^3.4.4"
+  }
+}
