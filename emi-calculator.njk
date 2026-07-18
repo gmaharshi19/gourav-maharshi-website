@@ -1,0 +1,97 @@
+---
+layout: base.njk
+title: EMI Calculator
+permalink: tools/emi-calculator/index.html
+---
+<a class="blog-back" href="/tools/">← Back to Tools</a>
+
+<div class="blog-hero">
+  <span class="eyebrow">Free Tool</span>
+  <h1>EMI Calculator</h1>
+  <p style="color:var(--ink); font-size:15.5px; margin-top:14px; max-width:560px;">
+    Work out your monthly loan payment, total interest, and total repayment amount — instantly, as you type.
+  </p>
+</div>
+
+<div class="calc-wrap">
+  <div class="calc-form">
+    <div class="calc-field">
+      <label for="principal">Loan Amount (₹)</label>
+      <input type="number" id="principal" value="1000000" min="0" step="1000">
+    </div>
+    <div class="calc-field">
+      <label for="rate">Annual Interest Rate (%)</label>
+      <input type="number" id="rate" value="9" min="0" step="0.05">
+    </div>
+    <div class="calc-field">
+      <label for="tenure">Loan Tenure</label>
+      <div class="calc-tenure-row">
+        <input type="number" id="tenure" value="20" min="1" step="1">
+        <select id="tenureUnit">
+          <option value="years" selected>Years</option>
+          <option value="months">Months</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-result">
+    <div class="calc-result-main">
+      <span class="calc-result-label">Monthly EMI</span>
+      <span class="calc-result-value" id="emiResult">₹0</span>
+    </div>
+    <div class="calc-result-row">
+      <span>Principal Amount</span>
+      <span id="principalResult">₹0</span>
+    </div>
+    <div class="calc-result-row">
+      <span>Total Interest Payable</span>
+      <span id="interestResult">₹0</span>
+    </div>
+    <div class="calc-result-row calc-result-total">
+      <span>Total Payment (Principal + Interest)</span>
+      <span id="totalResult">₹0</span>
+    </div>
+  </div>
+</div>
+
+<p class="calc-note">This is an indicative estimate using a standard reducing-balance EMI formula. Actual figures from your lender may vary slightly based on processing fees, exact disbursement date, and compounding method.</p>
+
+<script>
+  function formatINR(num) {
+    return '₹' + Math.round(num).toLocaleString('en-IN');
+  }
+
+  function calculateEMI() {
+    const P = parseFloat(document.getElementById('principal').value) || 0;
+    const annualRate = parseFloat(document.getElementById('rate').value) || 0;
+    let tenure = parseFloat(document.getElementById('tenure').value) || 0;
+    const tenureUnit = document.getElementById('tenureUnit').value;
+
+    const n = tenureUnit === 'years' ? tenure * 12 : tenure;
+    const r = annualRate / 12 / 100;
+
+    let emi = 0;
+    if (r === 0) {
+      emi = n > 0 ? P / n : 0;
+    } else if (n > 0) {
+      const factor = Math.pow(1 + r, n);
+      emi = (P * r * factor) / (factor - 1);
+    }
+
+    const totalPayment = emi * n;
+    const totalInterest = totalPayment - P;
+
+    document.getElementById('emiResult').textContent = formatINR(emi);
+    document.getElementById('principalResult').textContent = formatINR(P);
+    document.getElementById('interestResult').textContent = formatINR(totalInterest > 0 ? totalInterest : 0);
+    document.getElementById('totalResult').textContent = formatINR(totalPayment > 0 ? totalPayment : 0);
+  }
+
+  ['principal', 'rate', 'tenure', 'tenureUnit'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', calculateEMI);
+    document.getElementById(id).addEventListener('change', calculateEMI);
+  });
+
+  calculateEMI();
+</script>
