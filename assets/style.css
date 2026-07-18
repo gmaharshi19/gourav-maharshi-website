@@ -307,3 +307,69 @@ main.page-main{padding:56px 32px 96px;}
 @media (max-width:860px){
   main.page-main{padding:40px 20px 64px;}
 }
+/* TOOLS / CALCULATORS */
+.tools-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+.tool-card{
+  display:block; background:var(--white); border:1px solid var(--line);
+  padding:28px 26px; transition:border-color 0.2s, transform 0.2s;
+}
+.tool-card:hover{border-color:var(--brass); transform:translateY(-2px);}
+.tool-card-tag{
+  font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
+  letter-spacing:0.08em; color:var(--brass); font-weight:500;
+}
+.tool-card h3{font-size:20px; margin:10px 0 8px;}
+.tool-card p{font-size:14px; color:var(--ink);}
+
+.calc-wrap{
+  display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:12px;
+  align-items:start;
+}
+.calc-form{
+  background:var(--white); border:1px solid var(--line); padding:30px;
+  display:flex; flex-direction:column; gap:22px;
+}
+.calc-field{display:flex; flex-direction:column; gap:8px;}
+.calc-field label{
+  font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase;
+  letter-spacing:0.05em; color:var(--sage);
+}
+.calc-field input, .calc-field select{
+  font-family:'Inter', sans-serif; font-size:16px; padding:11px 14px;
+  border:1px solid var(--line); background:var(--parchment); color:var(--navy);
+  border-radius:2px;
+}
+.calc-field input:focus, .calc-field select:focus{
+  outline:none; border-color:var(--brass);
+}
+.calc-tenure-row{display:grid; grid-template-columns:1fr 110px; gap:10px;}
+
+.calc-result{
+  background:var(--navy); color:var(--white); padding:30px;
+}
+.calc-result-main{
+  display:flex; flex-direction:column; gap:6px; padding-bottom:22px;
+  border-bottom:1px solid rgba(255,255,255,0.15); margin-bottom:18px;
+}
+.calc-result-label{
+  font-family:'IBM Plex Mono', monospace; font-size:12px; text-transform:uppercase;
+  letter-spacing:0.06em; color:var(--brass-light);
+}
+.calc-result-value{
+  font-family:'IBM Plex Mono', monospace; font-size:clamp(28px,3.4vw,38px); font-weight:500;
+}
+.calc-result-row{
+  display:flex; justify-content:space-between; font-size:14px;
+  color:rgba(255,255,255,0.78); padding:9px 0;
+}
+.calc-result-total{
+  border-top:1px solid rgba(255,255,255,0.15); margin-top:6px; padding-top:14px;
+  color:var(--white); font-weight:600;
+}
+.calc-note{
+  font-size:13px; color:var(--sage); margin-top:24px; max-width:640px;
+}
+@media (max-width:860px){
+  .tools-grid{grid-template-columns:1fr;}
+  .calc-wrap{grid-template-columns:1fr;}
+}
