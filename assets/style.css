@@ -180,7 +180,7 @@ nav .wrap{
 .about-photo{
   border:1px solid var(--line); padding:14px; background:var(--white);
 }
-.about-photo img{width:100%;}
+.about-photo img{width:100%; transform:scaleX(-1);}
 
 /* PROGRAMS */
 .programs{background:var(--parchment-2);}
